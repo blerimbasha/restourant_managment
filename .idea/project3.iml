@@ -21,6 +21,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/easycorp/easy-log-handler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/fig/link-util" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ircmaxell/password-compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
@@ -70,6 +71,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-apcu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-icu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php55" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/profiler-pack" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-access" />

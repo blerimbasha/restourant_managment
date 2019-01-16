@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -19,63 +20,43 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $number;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $street;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $region;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function setUsername(string $username): self
     {
-        $this->name = $name;
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getPassword(): ?string
     {
-        return $this->lastname;
+        return $this->password;
     }
 
-    public function setLastname(string $lastname): self
+    public function setPassword(string $password): self
     {
-        $this->lastname = $lastname;
+        $this->password = $password;
 
         return $this;
     }
@@ -92,51 +73,66 @@ class User
         return $this;
     }
 
-    public function getNumber(): ?string
+    public function serialize()
     {
-        return $this->number;
+        return $this->serialize([
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->password
+        ]);
     }
 
-    public function setNumber(string $number): self
-    {
-        $this->number = $number;
 
-        return $this;
+    public function unserialize($string)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->password,
+            ) = unserialize($string, ['allowed_clases' => false]);
     }
 
-    public function getCity(): ?string
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
     {
-        return $this->city;
+        return array('ROLE_USER');
     }
 
-    public function setCity(string $city): self
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
     {
-        $this->city = $city;
-
-        return $this;
+        // TODO: Implement getSalt() method.
     }
 
-    public function getStreet(): ?string
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
     {
-        return $this->street;
-    }
-
-    public function setStreet(string $street): self
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
+        // TODO: Implement eraseCredentials() method.
     }
 }

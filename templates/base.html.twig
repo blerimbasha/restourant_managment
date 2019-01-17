@@ -23,11 +23,11 @@
         <link href="/demo/demo.css" rel="stylesheet"/>
     {% endblock %}
 </head>
-<body class="">
 {% block aside %}
-    {{ include('aside.html.twig') }}
+    {% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}
+        {{ include('aside.html.twig') }}
+    {% endif %}
 {% endblock %}
-
 {% block body %}
 {% endblock %}
 {% block javascripts %}
@@ -253,5 +253,4 @@
         });
     </script>
 {% endblock %}
-</body>
 </html>

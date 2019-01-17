@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,6 +19,36 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $number;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $create_date;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $username;
@@ -31,6 +62,15 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $email;
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $role;
+
+    public function __construct()
+    {
+        $this->create_date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -95,22 +135,19 @@ class User implements UserInterface
     }
 
     /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return array('ROLE_USER');
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
     }
 
     /**
@@ -135,4 +172,102 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname): void
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateDate()
+    {
+        return $this->create_date;
+    }
+
+    /**
+     * @param mixed $create_date
+     */
+    public function setCreateDate($create_date): void
+    {
+        $this->create_date = $create_date;
+    }
+
+
 }

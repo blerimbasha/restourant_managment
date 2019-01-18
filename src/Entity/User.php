@@ -4,7 +4,11 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -49,7 +53,7 @@ class User implements UserInterface
     private $create_date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
@@ -59,7 +63,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
     /**
@@ -67,9 +71,12 @@ class User implements UserInterface
      */
     private $role;
 
+    private $passwordEncoder;
+
     public function __construct()
     {
         $this->create_date = new \DateTime();
+        $this->role = array('ROLE_USER');
     }
 
     public function getId(): ?int

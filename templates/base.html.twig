@@ -24,9 +24,9 @@
     {% endblock %}
 </head>
 {% block aside %}
-    {% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}
+    {#{% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}#}
         {{ include('aside.html.twig') }}
-    {% endif %}
+    {#{% endif %}#}
 {% endblock %}
 {% block body %}
 {% endblock %}

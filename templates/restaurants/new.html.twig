@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %} New Restaurants {% endblock %}
+{% block body %}
+    <div class="wrapper">
+        <div class="main-panel">
+            {% include 'navigation.html.twig' %}
+            {% include 'alert.html.twig' %}
+            <h1>New Restaurant</h1>
+
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -33,6 +33,8 @@
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
                             <a href="{{ path('new_client') }}" class="dropdown-item">Add new client</a>
                             <a href="{{ path('user') }}" class="dropdown-item">Users</a>
+                            <a href="{{ path('restaurants') }}" class="dropdown-item">Restaurants</a>
+                            <a href="{{ path('new_restaurant') }}" class="dropdown-item">New Restaurant</a>
                         {% endif %}
                     </div>
                 </li>

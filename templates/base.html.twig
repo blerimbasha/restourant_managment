@@ -24,9 +24,17 @@
     {% endblock %}
 </head>
 {% block aside %}
-    {#{% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}#}
         {{ include('aside.html.twig') }}
-    {#{% endif %}#}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="main-panel">
+                <div class="alert alert-{{ label }} alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 {% block body %}
 {% endblock %}

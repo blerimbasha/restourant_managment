@@ -30,3 +30,4 @@ security:
 #         - { path: ^/admin, roles: ['IS_AUTHENTICATED_ANONYMOUSLY','ROLE_SUPER_ADMIN']  }
          - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
          - { path: ^/user, roles: ['ROLE_USER','ROLE_SUPER_ADMIN' ]}
+         - { path: ^/user/new, roles: ['ROLE_SUPER_ADMIN' ]}

@@ -20,7 +20,6 @@
                                         Username
                                     </th>
                                     <th{% if restaurants.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Name', 'r.name') }}</th>
-
                                     <th>
                                         Hall_1
                                     </th>
@@ -31,7 +30,7 @@
                                         Acive
                                     </th>
                                     <th>{{ knp_pagination_sortable(restaurants, 'Comments', ['r.comment', 'r.id']) }}</th>
-                                    <th>
+                                    <th style="width: 10%">
                                         Action
                                     </th>
                                 </tr>

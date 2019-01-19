@@ -3,6 +3,9 @@
 {% block body %}
     <div class="wrapper">
         <div class="main-panel">
+            {{ include('navigation.html.twig') }}
+            <h1>Restaurants</h1>
+
             {{ form_start(form) }}
             {{ form_end(form) }}
         </div>

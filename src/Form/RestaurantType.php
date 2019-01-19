@@ -15,14 +15,7 @@ class RestaurantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('name')
-            ->add('name', null, [
-                'actions' => [
-                    'move' => [
-                        'template' => '@PixSortableBehavior/Default/_sort.html.twig'
-                    ],
-                ]
-            ])
+            ->add('name')
             ->add('userId')
             ->add('hall1')
             ->add('hall2')

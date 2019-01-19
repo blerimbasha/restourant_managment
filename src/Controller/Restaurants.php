@@ -76,19 +76,19 @@ class Restaurants extends AbstractController
     public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
-        $form = $this->createFormBuilder(RestaurantType::class, $restaurant);
+        $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 
-//        if (!$restaurant) {
-//            $this->addFlash('danger','Your Restaurant not exist');
-//            return $this->redirectToRoute('restaurants');
-//        }
+        if (!$restaurant) {
+            $this->addFlash('danger','Your Restaurant not exist');
+            return $this->redirectToRoute('restaurants');
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump('sdasd');die;
             $em->flush();
+            $this->addFlash('success','Your Restaurant has been edited');
+            return $this->redirectToRoute('restaurants');
         }
         return $this->render('restaurants/edit.html.twig',[
             'form' => $form->createView()

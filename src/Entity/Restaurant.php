@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,17 @@ class Restaurant
     private $active;
 
     /**
+     * @var \App\Entity\Regions
+     * @ORM\ManyToOne(targetEntity="App\Entity\Regions", inversedBy="region_id")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="region", referencedColumnName="id")
+     *     })
+     *
+     * @ORM\Column(type="string")
+     */
+    private $region;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $comment;
@@ -54,6 +66,8 @@ class Restaurant
     public function __construct()
     {
         $this->create_date = new \DateTime();
+
+        $this->region = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,6 +134,24 @@ class Restaurant
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     */
+    public function setRegion($region): void
+    {
+        $this->region = $region;
+    }
+
+
 
     public function getComment(): ?string
     {

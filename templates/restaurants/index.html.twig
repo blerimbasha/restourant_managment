@@ -29,6 +29,9 @@
                                     <th>
                                         Acive
                                     </th>
+                                    <th>
+                                        Regions
+                                    </th>
                                     <th>{{ knp_pagination_sortable(restaurants, 'Comments', ['r.comment', 'r.id']) }}</th>
                                     <th style="width: 10%">
                                         Action
@@ -52,6 +55,9 @@
                                         </td>
                                         <td>
                                             {{ restaurant.active }}
+                                        </td>
+                                        <td>
+                                            {{ restaurant.region }}
                                         </td>
                                         <td>
                                             {{ restaurant.comment }}

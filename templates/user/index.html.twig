@@ -12,47 +12,55 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">Simple Table</h4>
-                            <p class="card-category"> Here is a subtitle for this table</p>
+                            <div class="row">
+                                <h4 class="card-title ">User`s table</h4>
+                                <p class="card-category"> Here is a subtitle for this table</p>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
-                                    <tr><th>
-                                            ID
-                                        </th>
-                                        <th>
-                                            Name
-                                        </th>
-                                        <th>
-                                            Country
-                                        </th>
-                                        <th>
-                                            City
-                                        </th>
-                                        <th>
-                                            Salary
-                                        </th>
-                                    </tr></thead>
-                                    <tbody>
                                     <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            Dakota Rice
-                                        </td>
-                                        <td>
-                                            Niger
-                                        </td>
-                                        <td>
-                                            Oud-Turnhout
-                                        </td>
-                                        <td class="text-primary">
-                                            $36,738
-                                        </td>
+                                        <th{% if users.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Name', 'u.name') }}</th>
+                                        <th{% if users.isSorted('u.lastname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Lastname', 'u.lastname') }}</th>
+                                        <th{% if users.isSorted('u.city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'City', 'u.city') }}</th>
+                                        <th{% if users.isSorted('u.number') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Number', 'u.number') }}</th>
+                                        <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Active', 'u.active') }}</th>
+                                        <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Date', 'u.active') }}</th>
+                                        <th{% if users.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Email', 'u.email') }}</th>
+                                        <th{% if users.isSorted('u.username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'username', 'u.username') }}</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                {{ user.name }}
+                                            </td>
+                                            <td>
+                                                {{ user.lastname }}
+                                            </td>
+                                            <td>
+                                                {{ user.city }}
+                                            </td>
+                                            <td>
+                                                {{ user.number }}
+                                            </td>
+                                            <td>
+                                                {{ user.isActive }}
+                                            </td>
+                                            <td>
+                                                {{ user.CreateDate|date("m.d.Y") }}
+                                            </td>
+                                            <td>
+                                                {{ user.email }}
+                                            </td>
+                                            <td>
+                                                {{ user.username }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

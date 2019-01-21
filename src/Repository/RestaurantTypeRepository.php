@@ -21,10 +21,7 @@ class RestaurantTypeRepository extends ServiceEntityRepository
 
     public function findByExampleField()
     {
-        return $this->createQueryBuilder('r')
-            ->select('r')
-            ->orderBy('r.id', 'ASC')
-            ->getQuery()
+        $qb =  $this->createQueryBuilder('r')
         ;
     }
 

@@ -37,14 +37,17 @@ class Restaurants extends AbstractController
         $repository = $this->getDoctrine()->getManager();
         $restaurants = $repository->getRepository('App:Restaurant')->findByExampleField();
 
-        $paginaton = $paginator->paginate(
+        $pagination = $paginator->paginate(
             $restaurants,
-            $request->query->getInt('page',1),
-            10
+            $request->query->getInt('page', 1),
+            5
         );
 
+
         return $this->render('restaurants/index.html.twig',[
-            'restaurants' => $paginaton
+            'restaurants' => $pagination,
+            'request' => $request->query->get('search')
+
         ]);
     }
 
@@ -66,9 +69,12 @@ class Restaurants extends AbstractController
             return $this->redirectToRoute('restaurants');
         }
         return $this->render('restaurants/new.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'request' => $request->query->get('search')
+
         ]);
     }
+
 
     /**
      * @Route("/edit/{id}", name="edit_restaurant")
@@ -91,7 +97,9 @@ class Restaurants extends AbstractController
             return $this->redirectToRoute('restaurants');
         }
         return $this->render('restaurants/edit.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'request' => $request->query->get('search')
+
         ]);
 
     }

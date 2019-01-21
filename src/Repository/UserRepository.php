@@ -19,6 +19,18 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findAllUsers($value)
+    {
+        $qb = $this->createQueryBuilder('u');
+        if ($value) {
+            $qb->andWhere('u.name LIKE :value OR u.lastname LIKE :value OR u.city LIKE :value OR u.number LIKE :value
+                            OR u.email LIKE :value OR u.username LIKE :value')
+                ->setParameter('value', '%' . $value . '%');
+        }
+        return $qb->orderBy('u.create_date', 'DESC')
+            ->getQuery();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

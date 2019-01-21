@@ -32,7 +32,8 @@
                                     <th>
                                         Regions
                                     </th>
-                                    <th>{{ knp_pagination_sortable(restaurants, 'Comments', ['r.comment', 'r.id']) }}</th>
+                                    <th{% if restaurants.isSorted('r.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'r.comment') }}</th>
+
                                     <th style="width: 10%">
                                         Action
                                     </th>
@@ -72,7 +73,7 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            {{ knp_pagination_render(restaurants) }}
+                            {#{{ knp_pagination_render(restaurants) }}#}
                         </div>
                     </div>
                 </div>

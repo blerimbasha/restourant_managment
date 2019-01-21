@@ -28,6 +28,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
 #         - { path: ^/admin, roles: ['IS_AUTHENTICATED_ANONYMOUSLY','ROLE_SUPER_ADMIN']  }
-         - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+         - { path: ^/admin/*, roles: ['ROLE_SUPER_ADMIN'] }
+         - { path: ^/restaurants/new, roles: ['ROLE_SUPER_ADMIN'] }
          - { path: ^/user, roles: ['ROLE_USER','ROLE_SUPER_ADMIN' ]}
          - { path: ^/user/new, roles: ['ROLE_SUPER_ADMIN' ]}

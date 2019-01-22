@@ -32,10 +32,16 @@ class Restaurants extends AbstractController
     /**
      * @Route("/", name="restaurants")
      */
-    public function index(Request $request, PaginatorInterface $paginator )
+    public function index(Request $request, PaginatorInterface $paginator)
     {
+//        dump($request->query->get('region'));die;
         $repository = $this->getDoctrine()->getManager();
-        $restaurants = $repository->getRepository('App:Restaurant')->findByExampleField();
+        $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
+            $request->query->get('search'),
+            $request->query->get('region')
+
+        );
+        $count = $repository->getRepository('App:Restaurant')->countRestaourants();
 
         $pagination = $paginator->paginate(
             $restaurants,
@@ -44,9 +50,10 @@ class Restaurants extends AbstractController
         );
 
 
-        return $this->render('restaurants/index.html.twig',[
+        return $this->render('restaurants/index.html.twig', [
             'restaurants' => $pagination,
-            'request' => $request->query->get('search')
+            'request' => $request->query->get('search'),
+//            'total' => $count
 
         ]);
     }
@@ -65,10 +72,10 @@ class Restaurants extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($restaurant);
             $em->flush();
-            $this->addFlash('success','Your changes were saved!');
+            $this->addFlash('success', 'Your changes were saved!');
             return $this->redirectToRoute('restaurants');
         }
-        return $this->render('restaurants/new.html.twig',[
+        return $this->render('restaurants/new.html.twig', [
             'form' => $form->createView(),
             'request' => $request->query->get('search')
 
@@ -87,21 +94,37 @@ class Restaurants extends AbstractController
         $form->handleRequest($request);
 
         if (!$restaurant) {
-            $this->addFlash('danger','Your Restaurant not exist');
+            $this->addFlash('danger', 'Your Restaurant not exist');
             return $this->redirectToRoute('restaurants');
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            $this->addFlash('success','Your Restaurant has been edited');
+            $this->addFlash('success', 'Your Restaurant has been edited');
             return $this->redirectToRoute('restaurants');
         }
-        return $this->render('restaurants/edit.html.twig',[
+        return $this->render('restaurants/edit.html.twig', [
             'form' => $form->createView(),
             'request' => $request->query->get('search')
 
         ]);
 
+    }
+
+    /**
+     * @Route("/view/{id}", name="view_restaurant")
+     */
+    public function viewAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restaurant = $em->getRepository('App:Restaurant')->find($id);
+
+        return $this->render('restaurants/view.html.twig', [
+                'restaurant' => $restaurant,
+                'request' => $request->query->get('search')
+
+            ]
+        );
     }
 
     /**
@@ -112,12 +135,13 @@ class Restaurants extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
         if (!$restaurant) {
-            $this->addFlash('danger','Your Restaurant not exist');
+            $this->addFlash('danger', 'Your Restaurant does not exist');
             return $this->redirectToRoute('restaurants');
         }
         $em->remove($restaurant);
         $em->flush();
-        $this->addFlash('success','Your Restaurant has been deleted');
+
+        $this->addFlash('success', 'Your Restaurant has been deleted');
         return $this->redirectToRoute('restaurants');
     }
 

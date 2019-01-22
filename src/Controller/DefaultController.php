@@ -13,8 +13,10 @@ class DefaultController extends Controller
      */
     public function index(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $regions = $em->getRepository('App:Regions')->findAll();
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+            'regions' => $regions,
             'request' => $request->query->get('search')
         ]);
     }

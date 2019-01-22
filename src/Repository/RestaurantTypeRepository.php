@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Regions;
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,21 +20,62 @@ class RestaurantTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, Restaurant::class);
     }
 
-    public function findByExampleField()
+    public function findAllRestaurants($value, $regions)
     {
-        $qb =  $this->createQueryBuilder('r')
-        ;
+        $qb =  $this->createQueryBuilder('r');
+        if ($value) {
+            $qb->andWhere('r.name LIKE :value')
+                ->setParameter('value','%'.$value.'%');
+        }
+        if ($regions == Regions::PRISHTINE) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        if ($regions == Regions::MITROVICE) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        if ($regions == Regions::GJILAN) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+
+        }
+        if ($regions == Regions::PRIZREN) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        if ($regions == Regions::MITROVICE) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        if ($regions == Regions::PEJE) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        if ($regions == Regions::GJAKOVE) {
+            $qb->andWhere('r.region = :regions')
+                ->setParameter('regions', $regions);
+        }
+        return $qb
+            ->orderBy('r.id','DESC')
+            ->getQuery()
+            ->getResult();
     }
 
-    /*
-    public function findOneBySomeField($value): ?Restaurant
+    public function countRestaourants()
+    {
+        return $this->createQueryBuilder('rt')
+            ->select('COUNT(rt.id) as id')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findByRegion($regionId)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->select('r')
+            ->where('r.region',$regionId)
+            ->setParameter('regio',$regionId);
     }
-    */
+
 }

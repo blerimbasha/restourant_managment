@@ -4,12 +4,10 @@
     <div class="wrapper">
         <div class="main-panel">
             {% include 'navigation.html.twig' %}
-            <h1>Restaurants</h1>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title ">Restaurants Table</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -34,7 +32,7 @@
                                     </th>
                                     <th{% if restaurants.isSorted('r.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'r.comment') }}</th>
 
-                                    <th style="width: 10%">
+                                    <th style="width: 24%">
                                         Action
                                     </th>
                                 </tr>
@@ -64,16 +62,25 @@
                                             {{ restaurant.comment }}
                                         </td>
                                         <td>
-                                            <a href="{{ path('edit_restaurant',{'id':restaurant.id}) }}">Edit</a>
-                                            <a href="#" data-toggle="modal"
-                                               data-target="#exampleModal">Remove </a>
-                                            {{ include('modal/modal.html.twig') }}
+                                            {% if is_granted(['ROLE_SUPER_ADMIN']) %}
+                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
+                                                   class="btn btn-sm success">View</a>
+                                                <a href="{{ path('edit_restaurant',{'id':restaurant.id}) }} "
+                                                   class="btn btn-warning btn-sm">Edit</a>
+                                                <a href="#" data-toggle="modal"
+                                                   data-target="#exampleModal"
+                                                   class="btn btn-primary btn-sm">Remove </a>
+                                                {{ include('modal/modal.html.twig') }}
+                                            {% else %}
+                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
+                                                   class="btn btn-sm success">View</a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            {#{{ knp_pagination_render(restaurants) }}#}
+                            {{ knp_pagination_render(restaurants) }}
                         </div>
                     </div>
                 </div>

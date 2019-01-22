@@ -35,7 +35,11 @@ class RestaurantType extends AbstractType
             ])
             ->add('active', CheckboxType::class)
             ->add('comment')
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'attr' => [
+                    'class' => 'btn btn-primary pull-right'
+                ]
+            ])
         ;
     }
 

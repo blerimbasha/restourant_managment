@@ -6,10 +6,22 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item active  ">
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'user' %}active{% endif %} ">
+                <a class="nav-link" href="{{ path('user') }}">
+                    <i class="material-icons">people_outlin</i>
+                    <p>Users`s</p>
+                </a>
+            </li>
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'homepage' %}active{% endif %} ">
                 <a class="nav-link" href="{{ path('homepage') }}">
                     <i class="material-icons">dashboard</i>
                     <p>Region`s</p>
+                </a>
+            </li>
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'restaurants' %}active{% endif %}">
+                <a class="nav-link" href="{{ path('restaurants') }}">
+                    <i class="material-icons">restaurants</i>
+                    <p>Restaurant`s</p>
                 </a>
             </li>
         </ul>

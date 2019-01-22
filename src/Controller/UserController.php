@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Knp\Component\Pager\PaginatorInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +24,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('App:User')->findAllUsers($request->query->get('search'));
+        $countUser = $em->getRepository('App:User')->countUsers();
 
         $pagination = $paginator->paginate(
             $users,
@@ -32,7 +34,8 @@ class UserController extends Controller
 
         return $this->render('user/index.html.twig', [
             'users' => $pagination,
-            'request' => $request->query->get('search')
+            'request' => $request->query->get('search'),
+            'count' => $countUser
         ]);
     }
 
@@ -76,5 +79,53 @@ class UserController extends Controller
             'form' => $form->createView(),
             'request' => $request->query->get('search')
         ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit_user")
+     */
+    public function edtAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('App:User')->find($id);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if (!$user) {
+            $this->addFlash('danger','Your User does not exist');
+            return $this->redirectToRoute('user');
+        }
+
+        if ($form->isSubmitted() && $form->isValid() ) {
+            $em->flush();
+            $this->addFlash('success','Your User has been edited');
+            return $this->redirectToRoute('user');
+        }
+
+        return $this->render('user/edit.html.twig',[
+            'form' => $form->createView(),
+            'request' => $request->query->get('search')
+        ]);
+
+    }
+
+    /**
+     * @Route("/remove/{id}", name="remove_user")
+     */
+    public function removeAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('App:User')->find($id);
+        if (!$user) {
+            $this->addFlash('danger','Your user does not exist');
+            return $this->redirectToRoute('user');
+        }
+
+        $em->remove($user);
+        $em->flush();
+
+        $this->addFlash('success','Your User has been removed.');
+        return $this->redirectToRoute('user');
+
     }
 }

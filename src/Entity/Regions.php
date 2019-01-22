@@ -9,6 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Regions
 {
+    const PRISHTINE  = 01;
+    const MITROVICE  = 02;
+    const GJILAN  = 03;
+    const PRIZREN  = 04;
+    const FERIZAJ  = 05;
+    const PEJE  = 06;
+    const GJAKOVE  = 07;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -53,6 +53,7 @@ class RegionsFixtures extends Fixture
         $manager->persist($region);
         $manager->flush();
 
+        $region = new Regions();
         $region->setRegionId('07');
         $region->setName('Gjakovë');
         $manager->persist($region);

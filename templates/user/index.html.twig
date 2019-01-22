@@ -5,65 +5,68 @@
 {% block body %}
     <div class="wrapper">
         <div class="main-panel">
-            <div class="container-fluid">
-                <div class="col-md-12" style="padding-bottom: 70px">
-                    {{ include('navigation.html.twig') }}
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-primary">
-                            <div class="row">
-                                <h4 class="card-title ">User`s table</h4>
-                                <p class="card-category"> Here is a subtitle for this table</p>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class=" text-primary">
+            {{ include('navigation.html.twig') }}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Users Table</h4>
+                        <p class="card-category">{{ count }} users</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th{% if users.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Name', 'u.name') }}</th>
+                                    <th{% if users.isSorted('u.lastname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Lastname', 'u.lastname') }}</th>
+                                    <th{% if users.isSorted('u.city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'City', 'u.city') }}</th>
+                                    <th{% if users.isSorted('u.number') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Number', 'u.number') }}</th>
+                                    <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Active', 'u.active') }}</th>
+                                    <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Date', 'u.active') }}</th>
+                                    <th{% if users.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Email', 'u.email') }}</th>
+                                    <th{% if users.isSorted('u.username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'username', 'u.username') }}</th>
+                                    <th style="width: 24%">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
                                     <tr>
-                                        <th{% if users.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Name', 'u.name') }}</th>
-                                        <th{% if users.isSorted('u.lastname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Lastname', 'u.lastname') }}</th>
-                                        <th{% if users.isSorted('u.city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'City', 'u.city') }}</th>
-                                        <th{% if users.isSorted('u.number') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Number', 'u.number') }}</th>
-                                        <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Active', 'u.active') }}</th>
-                                        <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Date', 'u.active') }}</th>
-                                        <th{% if users.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Email', 'u.email') }}</th>
-                                        <th{% if users.isSorted('u.username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'username', 'u.username') }}</th>
+                                        <td>
+                                            {{ user.name }}
+                                        </td>
+                                        <td>
+                                            {{ user.lastname }}
+                                        </td>
+                                        <td>
+                                            {{ user.city }}
+                                        </td>
+                                        <td>
+                                            {{ user.number }}
+                                        </td>
+                                        <td>
+                                            {{ user.isActive }}
+                                        </td>
+                                        <td>
+                                            {{ user.CreateDate|date("m.d.Y") }}
+                                        </td>
+                                        <td>
+                                            {{ user.email }}
+                                        </td>
+                                        <td>
+                                            {{ user.username }}
+                                        </td>
+                                        <td>
+                                            <a href="#"
+                                               class="btn btn-sm success">View</a>
+                                            <a href="{{ path('edit_user',{'id':user.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" data-toggle="modal"
+                                               data-target="#exampleModal" class="btn btn-primary btn-sm">Remove </a>
+                                            {{ include('modal/removeUser.html.twig') }}
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for user in users %}
-                                        <tr>
-                                            <td>
-                                                {{ user.name }}
-                                            </td>
-                                            <td>
-                                                {{ user.lastname }}
-                                            </td>
-                                            <td>
-                                                {{ user.city }}
-                                            </td>
-                                            <td>
-                                                {{ user.number }}
-                                            </td>
-                                            <td>
-                                                {{ user.isActive }}
-                                            </td>
-                                            <td>
-                                                {{ user.CreateDate|date("m.d.Y") }}
-                                            </td>
-                                            <td>
-                                                {{ user.email }}
-                                            </td>
-                                            <td>
-                                                {{ user.username }}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Restaurant;
+use App\Entity\User;
 use App\Form\RestaurantType;
 use phpDocumentor\Reflection\Types\This;
 use App\Form\UserType;
@@ -34,7 +35,6 @@ class Restaurants extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator)
     {
-//        dump($request->query->get('region'));die;
         $repository = $this->getDoctrine()->getManager();
         $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
             $request->query->get('search'),
@@ -88,6 +88,7 @@ class Restaurants extends AbstractController
      */
     public function editAction(Request $request, $id)
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
         $form = $this->createForm(RestaurantType::class, $restaurant);
@@ -101,7 +102,7 @@ class Restaurants extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Your Restaurant has been edited');
-            return $this->redirectToRoute('restaurants');
+                return $this->redirectToRoute('restaurants');
         }
         return $this->render('restaurants/edit.html.twig', [
             'form' => $form->createView(),
@@ -143,6 +144,24 @@ class Restaurants extends AbstractController
 
         $this->addFlash('success', 'Your Restaurant has been deleted');
         return $this->redirectToRoute('restaurants');
+    }
+
+    /**
+     * @param $id
+     * @Route("/user/myRestaurant/{id}", name="my_restaurant")
+     */
+    public function myRestaurantAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
+
+        return $this->render('user/myView.html.twig', [
+                'restaurant' => $myRestaurant,
+                'request' => $request->query->get('search')
+
+            ]
+        );
+
     }
 
 }

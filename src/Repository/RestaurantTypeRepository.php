@@ -44,7 +44,7 @@ class RestaurantTypeRepository extends ServiceEntityRepository
             $qb->andWhere('r.region = :regions')
                 ->setParameter('regions', $regions);
         }
-        if ($regions == Regions::MITROVICE) {
+        if ($regions == Regions::FERIZAJ) {
             $qb->andWhere('r.region = :regions')
                 ->setParameter('regions', $regions);
         }

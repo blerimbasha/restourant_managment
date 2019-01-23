@@ -10,13 +10,13 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Regions
 {
-    const PRISHTINE  = 01;
-    const MITROVICE  = 02;
-    const GJILAN  = 03;
-    const PRIZREN  = 04;
-    const FERIZAJ  = 05;
-    const PEJE  = 06;
-    const GJAKOVE  = 07;
+    const PRISHTINE  = 1;
+    const MITROVICE  = 2;
+    const GJILAN  = 3;
+    const PRIZREN  = 4;
+    const FERIZAJ  = 5;
+    const PEJE  = 6;
+    const GJAKOVE  = 7;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,8 +24,10 @@ class Regions
      */
     private $id;
 
+
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="userId")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="region_id")
      */
     private $region_id;
 
@@ -35,7 +37,6 @@ class Regions
     private $name;
     public function __construct()
     {
-
         $this->region_id = new ArrayCollection();
     }
     public function __toString()
@@ -51,7 +52,7 @@ class Regions
         return $this->id;
     }
 
-    public function getRegionId(): ?int
+    public function getRegionId()
     {
         return $this->region_id;
     }

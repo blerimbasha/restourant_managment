@@ -33,7 +33,9 @@ class RestaurantType extends AbstractType
                 return $regions->getName();
                 }
             ])
-            ->add('active', CheckboxType::class)
+            ->add('active', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('comment')
             ->add('submit', SubmitType::class,[
                 'attr' => [

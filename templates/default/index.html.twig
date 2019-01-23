@@ -13,13 +13,13 @@
                             <div class="card card-stats">
                                 <div class="card-header card-header-warning card-header-icon">
                                     <div class="card-icon">
-                                        <h2>0{{ region.regionId }}</h2>
+                                        <h2>0{{ region.id }}</h2>
                                     </div>
                                 </div>
                                 <h4 class="p-lg-3">{{ region.name }}</h4>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <a href="{{ path('restaurants',{'region':region.regionId}) }}">
+                                        <a href="{{ path('restaurants',{'region':region.id}) }}">
                                             <i class="material-icons" style="top:0px">search</i> Kerko ketu
                                         </a>
                                     </div>

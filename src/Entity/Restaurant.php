@@ -17,10 +17,6 @@ class Restaurant
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $user_id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,28 +24,29 @@ class Restaurant
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $hall_1;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $hall_2;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      */
     private $active;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $userId;
+
+    /**
      * @var \App\Entity\Regions
      * @ORM\ManyToOne(targetEntity="App\Entity\Regions", inversedBy="region_id")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="region", referencedColumnName="id")
-     *     })
-     *
-     * @ORM\Column(type="string")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
      */
     private $region;
 
@@ -66,7 +63,6 @@ class Restaurant
     public function __construct()
     {
         $this->create_date = new \DateTime();
-
         $this->region = new ArrayCollection();
     }
 
@@ -75,17 +71,23 @@ class Restaurant
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getUserId()
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
-    public function setUserId(int $user_id): self
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId): void
     {
-        $this->user_id = $user_id;
-
-        return $this;
+        $this->userId = $userId;
     }
+
+
 
     public function getName(): ?string
     {
@@ -99,29 +101,39 @@ class Restaurant
         return $this;
     }
 
-    public function getHall1(): ?int
+    /**
+     * @return mixed
+     */
+    public function getHall1()
     {
         return $this->hall_1;
     }
 
-    public function setHall1(int $hall_1): self
+    /**
+     * @param mixed $hall_1
+     */
+    public function setHall1($hall_1): void
     {
         $this->hall_1 = $hall_1;
-
-        return $this;
     }
 
-    public function getHall2(): ?int
+    /**
+     * @return mixed
+     */
+    public function getHall2()
     {
         return $this->hall_2;
     }
 
-    public function setHall2(int $hall_2): self
+    /**
+     * @param mixed $hall_2
+     */
+    public function setHall2($hall_2): void
     {
         $this->hall_2 = $hall_2;
-
-        return $this;
     }
+
+
 
     public function getActive(): ?bool
     {
@@ -175,5 +187,10 @@ class Restaurant
         $this->create_date = $create_date;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->region;
     }
 }

@@ -53,7 +53,7 @@ class User implements UserInterface
     private $create_date;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $username;
 
@@ -63,11 +63,11 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $email;
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="simple_array")
      */
     private $role;
 
@@ -118,7 +118,7 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
-    }
+    }#
 
     public function serialize()
     {

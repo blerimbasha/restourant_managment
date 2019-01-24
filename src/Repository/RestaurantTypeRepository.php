@@ -74,8 +74,15 @@ class RestaurantTypeRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->select('r')
-            ->where('r.region',$regionId)
-            ->setParameter('regio',$regionId);
+            ->where('r.region',$regionId);
+    }
+
+    public function myRestaturant($userId)
+    {
+        $qb =  $this->createQueryBuilder('r')
+            ->select('r')
+            ->where('r.userId = 4');
+        return $qb->getQuery()->getResult();
     }
 
 }

@@ -21,30 +21,4 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/autocomplete", name="city_autocomplete")
-     */
-    public function autocompleteAction(Request $request)
-    {
-        $names = array();
-        $term = trim(strip_tags($request->get('term')));
-
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('App:User')->createQueryBuilder('u')
-            ->where('u.name LIKE :name')
-            ->setParameter('name', '%'.$term.'%')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($entities as $entity)
-        {
-            $names[] = $entity->getName();
-        }
-
-        $response = new JsonResponse();
-        $response->setData($names);
-
-        return $response;
-    }
 }

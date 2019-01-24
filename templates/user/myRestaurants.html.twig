@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %} My Restaurant {% endblock %}
+{% block body %}
+    <div class="wrapper">
+        <div class="main-panel">
+            {{ include('navigation.html.twig') }}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <h2>My Restaurants </h2>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    {% for restaurants in restaurant %}
+                                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                            <div class="card card-stats">
+                                                <div class="card-header card-header-success card-header-icon">
+                                                    <div class="card-icon">
+                                                        <i class="material-icons">restaurants</i>
+                                                    </div>
+                                                    <p class="card-category">Total Reservation</p>
+                                                    <h3 class="card-title">49/50
+                                                    </h3>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="stats">
+                                                        <h4>
+                                                            <a href="{{ path('my_restaurant',{'id':restaurants.id}) }}">{{ restaurants.name }}</a>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

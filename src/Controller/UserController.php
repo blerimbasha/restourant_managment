@@ -126,6 +126,5 @@ class UserController extends Controller
 
         $this->addFlash('success','Your User has been removed.');
         return $this->redirectToRoute('user');
-
     }
 }

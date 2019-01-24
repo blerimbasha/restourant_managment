@@ -122,7 +122,6 @@ class Restaurants extends AbstractController
 
         return $this->render('restaurants/view.html.twig', [
                 'restaurant' => $restaurant,
-                'request' => $request->query->get('search')
 
             ]
         );
@@ -146,22 +145,38 @@ class Restaurants extends AbstractController
         return $this->redirectToRoute('restaurants');
     }
 
-    /**
-     * @param $id
-     * @Route("/user/myRestaurant/{id}", name="my_restaurant")
-     */
-    public function myRestaurantAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
 
-        return $this->render('user/myView.html.twig', [
+    /**
+     * @Route("/user/myRestaurants", name="my_restaurants")
+     */
+    public function myRestaurantsAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        $myRestaurant = $em->getRepository('App:Restaurant')->myRestaturant($user->getId());
+
+        return $this->render('user/myRestaurants.html.twig', [
                 'restaurant' => $myRestaurant,
-                'request' => $request->query->get('search')
 
             ]
         );
 
+    }
+    
+    /**
+     * @Route("/user/myRestaurant/{id}", name="my_restaurant")
+     */
+    public function myRestaurantAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+       
+        $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
+
+        return $this->render('user/myView.html.twig', [
+           'restaurant' => $myRestaurant,
+        ]);
     }
 
 }

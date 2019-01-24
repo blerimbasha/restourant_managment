@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
-{% block title %} My Restaurant {% endblock %}
+{% block title %} My View {% endblock %}
 {% block body %}
     <div class="wrapper">
         <div class="main-panel">
-            {{ include('navigation.html.twig') }}
-
+            {% include 'navigation.html.twig' %}
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
-                            <h2>My Reservations </h2>
+                            <h3>Reservation date</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-profile">
+                            <div class="card-body">
+                                <h6 class="card-category text-gray">{{ restaurant.name }}</h6>
+                                <h4 class="card-title">Alec Thompson</h4>
+                                <h5 class="card-title">{{ restaurant.userId }}</h5>
+                                <h5 class="card-title">{{ restaurant.region.name }}</h5>
+                                <p class="card-description">
+                                    {{ restaurant.comment }}
+                                </p>
+                                <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                            </div>
                         </div>
                     </div>
                 </div>

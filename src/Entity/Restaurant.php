@@ -39,7 +39,9 @@ class Restaurant
     private $active;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var  \App\Entity\User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="user_id")
+     * ORM\@ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $userId;
 

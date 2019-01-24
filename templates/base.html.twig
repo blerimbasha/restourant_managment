@@ -11,6 +11,7 @@
         <title>
             Material Dashboard by Creative Tim
         </title>
+
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
         <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
 
@@ -24,6 +25,9 @@
         <link href="/css/material-dashboard.css?v=2.1.1" rel="stylesheet"/>
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="/demo/demo.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
     {% endblock %}
 </head>
 {% block aside %}
@@ -42,11 +46,9 @@
 {% block body %}
 {% endblock %}
 {% block javascripts %}
-
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="/js/main.js"></script>
-
-
-
 
 
     <script src="/js/core/jquery.min.js"></script>
@@ -89,6 +91,7 @@
     <script src="/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="/demo/demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
             $().ready(function () {

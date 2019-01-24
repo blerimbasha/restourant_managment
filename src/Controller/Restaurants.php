@@ -41,7 +41,6 @@ class Restaurants extends AbstractController
             $request->query->get('region')
 
         );
-        $count = $repository->getRepository('App:Restaurant')->countRestaourants();
 
         $pagination = $paginator->paginate(
             $restaurants,
@@ -53,7 +52,6 @@ class Restaurants extends AbstractController
         return $this->render('restaurants/index.html.twig', [
             'restaurants' => $pagination,
             'request' => $request->query->get('search'),
-//            'total' => $count
 
         ]);
     }
@@ -171,7 +169,7 @@ class Restaurants extends AbstractController
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-       
+
         $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
 
         return $this->render('user/myView.html.twig', [

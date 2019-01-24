@@ -41,8 +41,7 @@
                                 {% for restaurant in restaurants %}
                                     <tr>
                                         <td>
-                                            {#{{ dump(restaurant.userId.name) }}#}
-                                            {{ restaurant.userId }}
+                                            {{ restaurant.getUserId.username }}
                                         </td>
                                         <td>
                                             {{ restaurant.name }}

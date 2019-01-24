@@ -24,10 +24,21 @@ class RestaurantType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('userId')
+            ->add('userId', EntityType::class ,[
+                'attr' => [
+                    'class' => 'select2'
+                ],
+                'class' => User::class,
+                'choice_label' => function ($region) {
+                return $region->getUsername();
+                }
+            ])
             ->add('hall1')
             ->add('hall2')
             ->add('region', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2'
+                ],
                 'class' => Regions::class,
                 'choice_label' => function ($regions) {
                 return $regions->getName();

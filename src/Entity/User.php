@@ -76,12 +76,36 @@ class User implements UserInterface
 
     private $passwordEncoder;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="userId")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     */
+    private $user_id;
+
     public function __construct()
     {
-
         $this->create_date = new \DateTime();
         $this->role = array('ROLE_USER');
+        $this->user_id = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id): void
+    {
+        $this->user_id = $user_id;
+    }
+
+
 
     public function getId(): ?int
     {

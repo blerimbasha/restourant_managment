@@ -26,7 +26,7 @@ class Regions
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Restaurant", mappedBy="region")
      * @ORM\JoinColumn(name="region_id", referencedColumnName="region_id")
      */
     private $region_id;

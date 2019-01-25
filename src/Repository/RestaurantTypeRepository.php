@@ -22,10 +22,13 @@ class RestaurantTypeRepository extends ServiceEntityRepository
 
     public function findAllRestaurants($value, $regions)
     {
-        $qb =  $this->createQueryBuilder('r');
+        $qb =  $this->createQueryBuilder('r')
+        ->join('r.region', 'region');
         if ($value) {
-            $qb->andWhere('r.name LIKE :value')
-                ->setParameter('value','%'.$value.'%');
+            $qb->andWhere('r.name LIKE :value ')
+                ->setParameter('value','%'.$value.'%')
+            ->orWhere('region.name LIKE :value')
+            ->setParameter('value', '%'.$value.'%');
         }
         if ($regions == Regions::PRISHTINE) {
             $qb->andWhere('r.region = :regions')

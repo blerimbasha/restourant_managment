@@ -12,6 +12,7 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(form) }}
+                        {{ form_row(form.isActive, {label_attr: {class: 'checkbox-custom'} }) }}
                         {{ form_end(form) }}
                     </div>
                 </div>

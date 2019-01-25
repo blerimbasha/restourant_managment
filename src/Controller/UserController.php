@@ -34,7 +34,6 @@ class UserController extends Controller
 
         return $this->render('user/index.html.twig', [
             'users' => $pagination,
-            'request' => $request->query->get('search'),
             'count' => $countUser
         ]);
     }

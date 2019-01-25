@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,9 +24,10 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('number', NumberType::class)
             ->add('city', TextType::class)
-//            ->add('password', TextType::class)
+            ->add('isActive', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('submit', SubmitType::class)
-//            ->add('role', EmailType::class)
         ;
     }
 

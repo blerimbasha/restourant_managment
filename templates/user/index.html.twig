@@ -21,8 +21,8 @@
                                     <th{% if users.isSorted('u.lastname') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Lastname', 'u.lastname') }}</th>
                                     <th{% if users.isSorted('u.city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'City', 'u.city') }}</th>
                                     <th{% if users.isSorted('u.number') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Number', 'u.number') }}</th>
-                                    <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Active', 'u.active') }}</th>
-                                    <th{% if users.isSorted('u.active') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Date', 'u.active') }}</th>
+                                    <th{% if users.isSorted('u.isActive') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Active', 'u.isActive') }}</th>
+                                    <th{% if users.isSorted('u.create_date') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Date', 'u.create_date') }}</th>
                                     <th{% if users.isSorted('u.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'Email', 'u.email') }}</th>
                                     <th{% if users.isSorted('u.username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(users, 'username', 'u.username') }}</th>
                                     <th style="width: 24%">Actions</th>

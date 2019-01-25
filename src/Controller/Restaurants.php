@@ -39,7 +39,6 @@ class Restaurants extends AbstractController
         $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
             $request->query->get('search'),
             $request->query->get('region')
-
         );
 
         $pagination = $paginator->paginate(
@@ -48,11 +47,8 @@ class Restaurants extends AbstractController
             5
         );
 
-
         return $this->render('restaurants/index.html.twig', [
             'restaurants' => $pagination,
-            'request' => $request->query->get('search'),
-
         ]);
     }
 

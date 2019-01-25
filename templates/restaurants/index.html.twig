@@ -1,90 +1,94 @@
 {% extends 'base.html.twig' %}
 {% block title %} Restaurants {% endblock %}
 {% block body %}
-    <div class="wrapper">
-        <div class="main-panel">
-            {% include 'navigation.html.twig' %}
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Restaurants Table</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <tr>
-                                    <th>
-                                        Username
-                                    </th>
-                                    <th{% if restaurants.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Name', 'r.name') }}</th>
-                                    <th>
-                                        Hall_1
-                                    </th>
-                                    <th>
-                                        Hall_2
-                                    </th>
-                                    <th>
-                                        Acive
-                                    </th>
-                                    <th>
-                                        Regions
-                                    </th>
-                                    <th{% if restaurants.isSorted('r.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'r.comment') }}</th>
+<div class="wrapper">
+    <div class="main-panel">
+        {% include 'navigation.html.twig' %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Restaurants Table</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Username
+                                </th>
+                                <th{% if restaurants.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Name', 'r.name') }}</th>
+                                <th>
+                                    Hall_1
+                                </th>
+                                <th>
+                                    Hall_2
+                                </th>
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <th>
+                                    Acive
+                                </th>
+                                {% endif %}
+                                <th>
+                                    Regions
+                                </th>
+                                <th{% if restaurants.isSorted('r.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'r.comment') }}</th>
 
-                                    <th style="width: 24%">
-                                        Action
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for restaurant in restaurants %}
-                                    <tr>
-                                        <td>
-                                            {{ restaurant.getUserId.username }}
-                                        </td>
-                                        <td>
-                                            {{ restaurant.name }}
-                                        </td>
-                                        <td>
-                                            {{ restaurant.hall1 }}
-                                        </td>
-                                        <td>
-                                            {{ restaurant.hall2 }}
-                                        </td>
+                                <th style="width: 24%">
+                                    Action
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for restaurant in restaurants %}
+                                <tr>
+                                    <td>
+                                        {{ restaurant.getUserId.username }}
+                                    </td>
+                                    <td>
+                                        {{ restaurant.name }}
+                                    </td>
+                                    <td>
+                                        {{ restaurant.hall1 }}
+                                    </td>
+                                    <td>
+                                        {{ restaurant.hall2 }}
+                                    </td>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                                         <td>
                                             {{ restaurant.active }}
                                         </td>
-                                        <td>
-                                            {{ restaurant.region.name }}
-                                        </td>
-                                        <td>
-                                            {{ restaurant.comment }}
-                                        </td>
-                                        <td>
-                                            {% if is_granted(['ROLE_SUPER_ADMIN']) %}
-                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
-                                                   class="btn btn-sm success">View</a>
-                                                <a href="{{ path('edit_restaurant',{'id':restaurant.id}) }} "
-                                                   class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="#" data-toggle="modal"
-                                                   data-target="#exampleModal"
-                                                   class="btn btn-primary btn-sm">Remove </a>
-                                                {{ include('modal/modal.html.twig') }}
-                                            {% else %}
-                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
-                                                   class="btn btn-sm success">View</a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            {{ knp_pagination_render(restaurants) }}
-                        </div>
+                                    {% endif %}
+                                    <td>
+                                        {{ restaurant.region.name }}
+                                    </td>
+                                    <td>
+                                        {{ restaurant.comment }}
+                                    </td>
+                                    <td>
+                                        {% if is_granted(['ROLE_SUPER_ADMIN']) %}
+                                            <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
+                                               class="btn btn-sm success">View</a>
+                                            <a href="{{ path('edit_restaurant',{'id':restaurant.id}) }} "
+                                               class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" data-toggle="modal"
+                                               data-target="#exampleModal"
+                                               class="btn btn-primary btn-sm">Remove </a>
+                                            {{ include('modal/modal.html.twig') }}
+                                        {% else %}
+                                            <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
+                                               class="btn btn-sm success">View</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ knp_pagination_render(restaurants) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

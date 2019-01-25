@@ -100,7 +100,7 @@ class Restaurants extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Your Restaurant has been edited');
-                return $this->redirectToRoute('restaurants');
+            return $this->redirectToRoute('restaurants');
         }
         return $this->render('restaurants/edit.html.twig', [
             'form' => $form->createView(),
@@ -150,7 +150,10 @@ class Restaurants extends AbstractController
     public function myRestaurantsAction(Request $request)
     {
         $user = $this->getUser();
-
+        if (!$user) {
+            $this->addFlash('danger', 'Please login');
+            return $this->redirectToRoute('restaurants');
+        }
         $em = $this->getDoctrine()->getManager();
         $myRestaurant = $em->getRepository('App:Restaurant')->myRestaturant($user->getId());
 
@@ -161,19 +164,20 @@ class Restaurants extends AbstractController
         );
 
     }
-    
+
     /**
      * @Route("/user/myRestaurant/{id}", name="my_restaurant")
      */
-    public function myRestaurantAction(Request $request, $id)
+    public function myRestaurantAction(Request $request, $id, Restaurant $restaurant, User $user)
     {
-        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
+        $usrId = $em->getRepository('App:Restaurant')->myUserIdExist('4');
 
         $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
 
         return $this->render('user/myView.html.twig', [
-           'restaurant' => $myRestaurant,
+            'restaurant' => $myRestaurant,
         ]);
     }
 

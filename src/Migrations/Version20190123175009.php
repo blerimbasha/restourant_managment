@@ -6,6 +6,7 @@ namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Symfony\Component\Form\AbstractType;
 
 /**
  * Auto-generated Migration: Please modify to your needs!

@@ -8,25 +8,30 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
-                            sdasd
+                            <h3>Reservation date</h3> <br>
+                            soon as possible :D
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card card-profile">
+                        <div class="card card-chart">
                             <div class="card-body">
-                                <h6 class="card-category text-gray">{{ restaurant.name }}</h6>
-                                <h4 class="card-title">Alec Thompson</h4>
-                                <h5 class="card-title">{{ restaurant.getUserId.username }}</h5>
-                                <h5 class="card-title">{{ restaurant.region.name }}</h5>
-                                <p class="card-description">
-                                    {{ restaurant.comment }}
-                                </p>
-                                <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                                <h4 class="card-title">{{ restaurant.name }}</h4>
+                                <p class="card-category">{{ restaurant.region.name }}</p>
+                                <p class="card-category">{{ restaurant.userId.name }} {{ restaurant.userId.lastname }}</p>
+                                <p class="card-category">{{ restaurant.userId.number }}</p>
+                                <p class="card-category">{{ restaurant.comment }}</p>
                             </div>
+                            <div class="card-footer">
+                                <div class="div">
+                                    {{ restaurant.menu|raw }}
+                                </div>
+                            </div>
+                            <a href="#pablo" class="btn btn-primary btn-round">Book here</a>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 {% endblock %}

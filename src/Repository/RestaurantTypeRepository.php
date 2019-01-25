@@ -81,6 +81,16 @@ class RestaurantTypeRepository extends ServiceEntityRepository
     {
         $qb =  $this->createQueryBuilder('r')
             ->select('r')
+            ->where('r.userId = :userId')
+            ->setParameter('userId', $userId);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function myUserIdExist($userId)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('r')
             ->where('r.userId = 4');
         return $qb->getQuery()->getResult();
     }

@@ -24,12 +24,12 @@ class Restaurant
     private $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $hall_1;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $hall_2;
 
@@ -61,6 +61,11 @@ class Restaurant
      * @ORM\Column(type="date")
      */
     private $create_date;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $menu;
 
     public function __construct()
     {
@@ -190,6 +195,24 @@ class Restaurant
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * @param mixed $menu
+     */
+    public function setMenu($menu): void
+    {
+        $this->menu = $menu;
+    }
+
+
 
     public function __toString()
     {

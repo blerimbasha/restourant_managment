@@ -4,23 +4,30 @@
     <div class="wrapper">
         <div class="main-panel">
             {{ include('navigation.html.twig') }}
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title">Edit Profile</h4>
                             <p class="card-category">Complete your profile</p>
                         </div>
-                        <div class="card-body">
-                            {{ form_start(form) }}
-                            {{ form_row(form.name)}}
-                            {{ form_row(form.userId)}}
-                            {{ form_row(form.hall1)}}
-                            {{ form_row(form.hall2)}}
-                            {{ form_row(form.region)}}
-                            {{ form_row(form.comment)}}
-                            {{ form_row(form.active, {label_attr: {class: 'checkbox-custom'} }) }}
-                            {{ form_end(form) }}
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    {{ form_row(form.name)}}
+                                    {{ form_row(form.userId)}}
+                                    {{ form_row(form.hall1)}}
+                                    {{ form_row(form.hall2)}}
+                                    {{ form_row(form.region)}}
+                                    {{ form_row(form.comment)}}
+                                    {{ form_row(form.active, {label_attr: {class: 'checkbox-custom'} }) }}
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                {{ form_row(form.menu)}}
+                            </div>
                         </div>
+                        {{ form_end(form) }}
                     </div>
                 </div>
         </div>

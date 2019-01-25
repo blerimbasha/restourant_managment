@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,39 +25,45 @@ class RestaurantType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('userId', EntityType::class ,[
+            ->add('userId', EntityType::class, [
                 'attr' => [
                     'class' => 'select2'
                 ],
                 'class' => User::class,
                 'choice_label' => function ($region) {
-                return $region->getUsername();
+                    return $region->getUsername();
                 }
             ])
             ->add('hall1')
             ->add('hall2')
+            ->add('menu', TextareaType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'tinycme'
+                ]
+            ])
             ->add('region', EntityType::class, [
                 'attr' => [
                     'class' => 'select2'
                 ],
                 'class' => Regions::class,
                 'choice_label' => function ($regions) {
-                return $regions->getName();
+                    return $regions->getName();
                 }
             ])
             ->add('active', CheckboxType::class, [
                 'required' => false
             ])
             ->add('comment')
-            ->add('submit', SubmitType::class,[
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary pull-right'
                 ]
-            ])
-        ;
+            ]);
     }
 
     private $router;
+
     public function __construct(UserRepository $userRepository, RouterInterface $router)
     {
         $this->router = $router;

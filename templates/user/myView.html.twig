@@ -5,33 +5,36 @@
         <div class="main-panel">
             {% include 'navigation.html.twig' %}
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <h3>Reservation date</h3> <br>
-                            soon as possible :D
+                {% for res in restaurant %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <h3>Reservation date</h3> <br>
+                                soon as possible :D
+                            </div>
                         </div>
-                    </div>
                         <div class="col-md-4">
                             <div class="card card-chart">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{ restaurant.name }}</h4>
-                                    <p class="card-category">{{ restaurant.userId.name }} {{ restaurant.userId.lastname }}</p>
-                                    <p class="card-category">{{ restaurant.userId.city }}, {{ restaurant.region.name }}</p>
-                                    <p class="card-category">{{ restaurant.userId.number }}</p>
-                                    <p class="card-category">{{ restaurant.comment }}</p>
+                                    <h4 class="card-title">{{ res.name }}</h4>
+                                    <p class="card-category">{{ res.userId.name }} {{ res.userId.lastname }}</p>
+                                    <p class="card-category">{{ res.userId.city }}, {{ res.region.name }}</p>
+                                    <p class="card-category">{{ res.userId.number }}</p>
+                                    <p class="card-category">{{ res.comment }}</p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="div">
-                                        {{ restaurant.menu|raw }}
+                                        {{ res.menu|raw }}
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

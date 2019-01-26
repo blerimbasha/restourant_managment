@@ -164,13 +164,13 @@ class Restaurants extends AbstractController
     /**
      * @Route("/user/myRestaurant/{id}", name="my_restaurant")
      */
-    public function myRestaurantAction(Request $request, $id, Restaurant $restaurant, User $user)
+    public function myRestaurantAction(Request $request, $id)
     {
-
         $em = $this->getDoctrine()->getManager();
-        $usrId = $em->getRepository('App:Restaurant')->myUserIdExist('4');
-
-        $myRestaurant = $em->getRepository('App:Restaurant')->find($id);
+        $myRestaurant = $em->getRepository('App:Restaurant')->findBy([
+            'id' => $id,
+            'userId' => $this->getUser()
+        ]);
 
         return $this->render('user/myView.html.twig', [
             'restaurant' => $myRestaurant,

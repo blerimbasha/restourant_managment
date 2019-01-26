@@ -66,6 +66,8 @@ class User implements UserInterface
      */
     private $password;
 
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=30, unique=true)
      */
@@ -74,6 +76,11 @@ class User implements UserInterface
      * @ORM\Column(type="simple_array")
      */
     private $role;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $resetToken;
 
     private $passwordEncoder;
 
@@ -136,6 +143,21 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+
 
     public function getEmail(): ?string
     {
@@ -304,4 +326,22 @@ class User implements UserInterface
     {
         $this->create_date = $create_date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param mixed $resetToken
+     */
+    public function setResetToken($resetToken): void
+    {
+        $this->resetToken = $resetToken;
+    }
+
+
 }

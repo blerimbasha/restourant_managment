@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ResetPasswordType;
 use App\Form\UserType;
 use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Tests\Encoder\PasswordEncoder;
 
 /**
  * Class UserController
@@ -126,4 +129,5 @@ class UserController extends Controller
         $this->addFlash('success','Your User has been removed.');
         return $this->redirectToRoute('user');
     }
+
 }

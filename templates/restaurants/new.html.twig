@@ -15,19 +15,35 @@
                             </div>
                             {{ form_start(form) }}
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="card-body">
                                         {{ form_row(form.name) }}
                                         {{ form_row(form.userId) }}
                                         {{ form_row(form.hall1) }}
                                         {{ form_row(form.hall2) }}
                                         {{ form_row(form.region) }}
+                                        <p>
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                              Upload max 5 photo
+                                            </a>
+                                        </p>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                {{ form_widget(form.coverPath) }} Cover Image
+                                                {{ form_widget(form.image1) }} Image 1
+                                                {{ form_widget(form.image2) }} Image 2
+                                                {{ form_widget(form.image3) }} Image 3
+                                                {{ form_widget(form.image4) }} Image 4
+                                            </div>
+                                        </div>
                                         {{ form_row(form.comment) }}
                                         {{ form_row(form.active, {label_attr: {class: 'checkbox-custom'} }) }}
+
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     {{ form_row(form.menu|raw) }}
+
                                 </div>
                             </div>
                             {{ form_end(form) }}

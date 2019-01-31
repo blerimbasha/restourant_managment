@@ -67,6 +67,34 @@ class Restaurant
      */
     private $menu;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $cover_path;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image_1;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image_2;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image_3;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image_4;
+
+
+
+
     public function __construct()
     {
         $this->create_date = new \DateTime();
@@ -212,10 +240,116 @@ class Restaurant
         $this->menu = $menu;
     }
 
+    /**
+     * @return string
+     */
+    public function getCoverPath()
+    {
+        return $this->cover_path;
+    }
+
+    /**
+     * @param string $cover_path
+     */
+    public function setCoverPath($cover_path)
+    {
+
+        if ($cover_path == null) {
+            return false;
+        } else {
+            $this->cover_path = $cover_path;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage1()
+    {
+        return $this->image_1;
+    }
+
+    /**
+     * @param string $image_1
+     */
+    public function setImage1($image_1)
+    {
+        if ($image_1 == null) {
+            return false;
+        } else {
+            $this->image_1 = $image_1;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage2()
+    {
+        return $this->image_2;
+    }
+
+    /**
+     * @param string $image_2
+     */
+    public function setImage2($image_2)
+    {
+        if ($image_2 == null) {
+            return false;
+        } else {
+            $this->image_2 = $image_2;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage3()
+    {
+        return $this->image_3;
+    }
+
+    /**
+     * @param string $image_3
+     */
+    public function setImage3($image_3)
+    {
+        if ($image_3 == null) {
+            return false;
+        } else {
+            $this->image_3 = $image_3;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage4()
+    {
+        return $this->image_4;
+    }
+
+    /**
+     * @param string $image_4
+     */
+    public function setImage4($image_4)
+    {
+        if ($image_4 == null) {
+            return false;
+        } else {
+            $this->image_4 = $image_4;
+        }
+    }
+
 
 
     public function __toString()
     {
         return (string) $this->region;
+        return (string) $this->cover_path;
+        return (string) $this->image_1;
+        return (string) $this->image_2;
+        return (string) $this->image_3;
+        return (string) $this->image_4;
     }
 }

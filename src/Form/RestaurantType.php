@@ -7,11 +7,13 @@ use App\Entity\Restaurant;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\BooleanType;
+use Doctrine\ORM\EntityRepository;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -55,6 +57,26 @@ class RestaurantType extends AbstractType
                 'required' => false
             ])
             ->add('comment')
+            ->add('coverPath', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
+            ->add('image1', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
+            ->add('image2', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
+            ->add('image3', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
+            ->add('image4', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary pull-right'

@@ -16,7 +16,9 @@
                         <div class="col-md-4">
                             <div class="card card-chart">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{ res.name }}</h4>
+                                    <h4 class="card-title">{{ res.name }}
+                                    <span><a href="{{ path('edit_restaurant',{'id':res.id}) }}" class="pull-right text-warning">Edit</a></span>
+                                    </h4>
                                     <p class="card-category">{{ res.userId.name }} {{ res.userId.lastname }}</p>
                                     <p class="card-category">{{ res.userId.city }}, {{ res.region.name }}</p>
                                     <p class="card-category">{{ res.userId.number }}</p>
@@ -25,7 +27,6 @@
                                 <div class="card-footer">
                                     <div class="div">
                                         {{ res.menu|raw }}
-
                                     </div>
                                 </div>
                             </div>

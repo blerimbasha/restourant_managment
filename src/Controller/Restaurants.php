@@ -130,41 +130,42 @@ class Restaurants extends Controller
             $this->addFlash('danger', 'Your Restaurant not exist');
             return $this->redirectToRoute('restaurants');
         }
+        $fileCover = $restaurant->getCoverPath();
+        $image1 = $restaurant->getImage1();
+        $image2 = $restaurant->getImage2();
+        $image3 = $restaurant->getImage3();
+        $image4 = $restaurant->getImage4();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $fileCover = $restaurant->getCoverPath();
-            $image1 = $restaurant->getImage1();
-            $image2 = $restaurant->getImage2();
-            $image3 = $restaurant->getImage3();
-            $image4 = $restaurant->getImage4();
-
-            if ($fileCover != null) {
+            if ($request->files->get('restaurant')['coverPath'] != null) {
                 $fileNameCover = $this->generateUniqueFileName().'.'.$fileCover->guessExtension();
                 $fileCover->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameCover);
                 $restaurant->setCoverPath($fileNameCover);
             }
-            if ($image1 != null) {
+            if ($request->files->get('restaurant')['image1'] != null) {
                 $fileNameImage1 = $this->generateUniqueFileName().'.'.$image1->guessExtension();
                 $image1->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage1);
                 $restaurant->setImage1($fileNameImage1);
 
             }
-            if ($image2 != null) {
+            if ($request->files->get('restaurant')['image2'] != null) {
                 $fileNameImage2 = $this->generateUniqueFileName().'.'.$image2->guessExtension();
                 $image2->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage2);
                 $restaurant->setImage2($fileNameImage2);
             }
-            if ($image3 != null) {
+            if ($request->files->get('restaurant')['image3'] != null) {
                 $fileNameImage3 = $this->generateUniqueFileName().'.'.$image3->guessExtension();
                 $image3->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage3);
                 $restaurant->setImage3($fileNameImage3);
             }
-            if ($image4 != null) {
+            if ($request->files->get('restaurant')['image4'] != null) {
                 $fileNameImage4 = $this->generateUniqueFileName().'.'.$image4->guessExtension();
                 $image4->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage4);
                 $restaurant->setImage4($fileNameImage4);
 
             }
+
             $em->flush();
             $this->addFlash('success', 'Your Restaurant has been edited');
             return $this->redirectToRoute('restaurants');

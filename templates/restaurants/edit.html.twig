@@ -4,122 +4,133 @@
     <div class="wrapper">
         <div class="main-panel">
             {{ include('navigation.html.twig') }}
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-primary">
-                            <h4 class="card-title">Edit Profile</h4>
-                            <p class="card-category">Complete your profile</p>
-                        </div>
-                        {{ form_start(form) }}
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    {{ form_row(form.name)}}
-                                    {{ form_row(form.userId)}}
-                                    {{ form_row(form.hall1)}}
-                                    {{ form_row(form.hall2)}}
-                                    {{ form_row(form.region)}}
-                                    {{ form_row(form.comment)}}
-
-
-                                    {{ form_row(form.active, {label_attr: {class: 'checkbox-custom'} }) }}
-                                </div>
-                                <div class="row card-body">
-                                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.userId) }}
+                                {{ form_row(form.hall1) }}
+                                {{ form_row(form.hall2) }}
+                                {{ form_row(form.region) }}
+                                {{ form_row(form.comment) }}
+                                {{ form_row(form.active, {label_attr: {class: 'checkbox-custom'} }) }}
+                            </div>
+                            <div class="row card-body">
+                                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                    {% if form.coverPath.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-                                           data-title="Test1"
+                                           data-title="Cover Image"
                                            data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.coverPath.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
                                                  src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.coverPath.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
-                                        {{ form_row(form.coverPath)}}
-                                    </div>
-                                    <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% endif %}
+                                    Cover Image
+                                    {{ form_widget(form.coverPath) }}
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% if form.image1.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-                                           data-title="Test1"
+                                           data-title="Image 1"
                                            data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image1.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
                                                  src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image1.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
-                                        {{ form_row(form.image1)}}
-                                    </div>
-                                    <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% endif %}
+                                    Image 1
+                                    {{ form_widget(form.image1) }}
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% if form.image2.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-                                           data-title="Test1"
+                                           data-title="Image 2"
                                            data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image2.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
                                                  src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image2.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
-                                        {{ form_row(form.image2)}}
-
-                                    </div>
-                                    <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% endif %}
+                                    Image 2
+                                    {{ form_widget(form.image2) }}
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% if form.image3.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-                                           data-title="Test1"
+                                           data-title="Image 3"
                                            data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image3.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
                                                  src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image3.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
-                                        {{ form_row(form.image3)}}
-
-                                    </div>
-                                    <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% endif %}
+                                    Image 3
+                                    {{ form_widget(form.image3) }}
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-xs-6 thumb">
+                                    {% if form.image4.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
-                                           data-title="Test1"
+                                           data-title="Image 4"
                                            data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image4.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
                                                  src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image4.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
-                                        {{ form_row(form.image4)}}
+                                    {% endif %}
+                                    Image 4
+                                    {{ form_widget(form.image4) }}
+                                </div>
+                                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="image-gallery-title"></h4>
+                                                <button type="button" class="close" data-dismiss="modal"><span
+                                                            aria-hidden="true">×</span><span
+                                                            class="sr-only">Close</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img id="image-gallery-image" class="img-responsive col-md-12" src="">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary float-left"
+                                                        id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                                                </button>
 
-                                    </div>
-                                    <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
-                                         aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="image-gallery-title"></h4>
-                                                    <button type="button" class="close" data-dismiss="modal"><span
-                                                                aria-hidden="true">×</span><span class="sr-only">Close</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary float-left"
-                                                            id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                                                    </button>
-
-                                                    <button type="button" id="show-next-image"
-                                                            class="btn btn-secondary float-right"><i
-                                                                class="fa fa-arrow-right"></i>
-                                                    </button>
-                                                </div>
+                                                <button type="button" id="show-next-image"
+                                                        class="btn btn-secondary float-right"><i
+                                                            class="fa fa-arrow-right"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card-body">
-                                    {{ form_row(form.menu)}}
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                {{ form_row(form.menu) }}
                             </div>
                         </div>
-                        {{ form_end(form) }}
                     </div>
+                    {{ form_end(form) }}
                 </div>
+            </div>
         </div>
     </div>
 {% endblock %}

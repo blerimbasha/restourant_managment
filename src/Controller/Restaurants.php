@@ -41,9 +41,11 @@ class Restaurants extends Controller
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $repository = $this->getDoctrine()->getManager();
+
+//        dump($request->request->get('search')['region']);die;
         $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
-            $request->query->get('search'),
-            $request->query->get('region')
+            ($request->request->get('search')['name']),
+            $request->request->get('search')['region']
         );
 
         $pagination = $paginator->paginate(
@@ -65,9 +67,9 @@ class Restaurants extends Controller
         $em = $this->getDoctrine()->getManager();
         $restaurant = new Restaurant();
         $lastId = $em->getRepository('App:Restaurant')->lastRestarantId();
-        $currentId = $lastId->getId() +1 ;
-
-//        dump($currentId);die;
+        if ($lastId != null) {
+            $currentId = $lastId->getId() + 1 ;
+        }
 
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
@@ -127,9 +129,6 @@ class Restaurants extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
-        $lastId = $em->getRepository('App:Restaurant')->lastRestarantId();
-        $currentId = $lastId->getId() +1 ;
-
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 

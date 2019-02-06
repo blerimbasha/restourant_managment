@@ -6,6 +6,7 @@
     <div class="main-panel">
         {% include 'navigation.html.twig' %}
         <div class="col-md-12">
+                {{ render(controller('App\\Controller\\SearchController::searchAction', {'request':app.request})) }}
             <div class="card">
                 <div class="card-header card-header-primary">
                     <h4 class="card-title ">Restaurants Table</h4>

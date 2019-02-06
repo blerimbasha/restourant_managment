@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('.select2').select2();
     tinymce.init({
         selector:'textarea',
-        height: 300
+        height: 300,
     })
 
     loadGallery(true, 'a.thumbnail');

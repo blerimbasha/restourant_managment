@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Restaurant;
+use App\Form\RestaurantType;
 use App\Form\SearchType;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +20,18 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchController extends Controller
 {
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/search", name="search")
      */
 
     public function searchAction(Request $request)
     {
-        return $this->render('search.html.twig');
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        return $this->render('search.html.twig', [
+            'form' => $form->createView(),
+            'request', $request
+
+        ]);
     }
 }

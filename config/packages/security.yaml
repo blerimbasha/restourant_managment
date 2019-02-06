@@ -33,3 +33,4 @@ security:
          - { path: ^/user, roles: ['ROLE_USER','ROLE_SUPER_ADMIN' ]}
          - { path: ^/user/new, roles: ['ROLE_SUPER_ADMIN' ]}
          - { path: ^/restaurants/user/myRestaurant/, roles: ['ROLE_USER','ROLE_SUPER_ADMIN' ]}
+         - { path: ^/restaurants/edit/*, roles: ['ROLE_USER','ROLE_SUPER_ADMIN' ]}

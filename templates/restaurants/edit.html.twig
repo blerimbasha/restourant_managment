@@ -24,13 +24,14 @@
                             </div>
                             <div class="row card-body">
                                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
                                     {% if form.coverPath.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
                                            data-title="Cover Image"
-                                           data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.coverPath.vars.data) }}"
+                                           data-image="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.coverPath.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
-                                                 src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.coverPath.vars.data) }}"
+                                                 src="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.coverPath.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
                                     {% endif %}
@@ -41,10 +42,10 @@
                                     {% if form.image1.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
                                            data-title="Image 1"
-                                           data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image1.vars.data) }}"
+                                           data-image="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image1.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
-                                                 src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image1.vars.data) }}"
+                                                 src="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image1.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
                                     {% endif %}
@@ -55,10 +56,10 @@
                                     {% if form.image2.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
                                            data-title="Image 2"
-                                           data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image2.vars.data) }}"
+                                           data-image="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image2.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
-                                                 src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image2.vars.data) }}"
+                                                 src="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image2.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
                                     {% endif %}
@@ -69,10 +70,10 @@
                                     {% if form.image3.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
                                            data-title="Image 3"
-                                           data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image3.vars.data) }}"
+                                           data-image="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image3.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
-                                                 src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image3.vars.data) }}"
+                                                 src="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image3.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
                                     {% endif %}
@@ -83,43 +84,17 @@
                                     {% if form.image4.vars.data is not null %}
                                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
                                            data-title="Image 4"
-                                           data-image="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image4.vars.data) }}"
+                                           data-image="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image4.vars.data) }}"
                                            data-target="#image-gallery">
                                             <img class="img-thumbnail"
-                                                 src="{{ asset('uploads/' ~ form.name.vars.data ~'/' ~ form.image4.vars.data) }}"
+                                                 src="{{ asset('uploads/' ~ form.vars.data.id ~'/' ~ form.image4.vars.data) }}"
                                                  alt="Another alt text">
                                         </a>
                                     {% endif %}
                                     Image 4
                                     {{ form_widget(form.image4) }}
                                 </div>
-                                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
-                                     aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="image-gallery-title"></h4>
-                                                <button type="button" class="close" data-dismiss="modal"><span
-                                                            aria-hidden="true">×</span><span
-                                                            class="sr-only">Close</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary float-left"
-                                                        id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                                                </button>
-
-                                                <button type="button" id="show-next-image"
-                                                        class="btn btn-secondary float-right"><i
-                                                            class="fa fa-arrow-right"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{ include('modal/galery.html.twig') }}
                             </div>
                         </div>
                         <div class="col-md-4">

@@ -98,4 +98,13 @@ class RestaurantTypeRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function lastRestarantId()
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->setMaxResults(1);
+        $qb->orderBy('r.id', 'DESC');
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
 }

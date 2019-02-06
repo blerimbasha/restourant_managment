@@ -64,6 +64,10 @@ class Restaurants extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $restaurant = new Restaurant();
+        $lastId = $em->getRepository('App:Restaurant')->lastRestarantId();
+        $currentId = $lastId->getId() +1 ;
+
+//        dump($currentId);die;
 
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
@@ -74,31 +78,32 @@ class Restaurants extends Controller
              $image3 = $restaurant->getImage3();
              $image4 = $restaurant->getImage4();
 
+
              if ($fileCover != null) {
                  $fileNameCover = $this->generateUniqueFileName().'.'.$fileCover->guessExtension();
-                 $fileCover->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameCover);
+                 $fileCover->move($this->getParameter('uploads_directory').'/'.$currentId,$fileNameCover);
                  $restaurant->setCoverPath($fileNameCover);
 
              }
              if ($image1 != null) {
                  $fileNameImage1 = $this->generateUniqueFileName().'.'.$image1->guessExtension();
-                 $image1->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage1);
+                 $image1->move($this->getParameter('uploads_directory').'/'.$currentId,$fileNameImage1);
                  $restaurant->setImage1($fileNameImage1);
 
              }
              if ($image2 != null) {
                  $fileNameImage2 = $this->generateUniqueFileName().'.'.$image2->guessExtension();
-                 $image2->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage2);
+                 $image2->move($this->getParameter('uploads_directory').'/'.$currentId,$fileNameImage2);
                  $restaurant->setImage2($fileNameImage2);
              }
              if ($image3 != null) {
                  $fileNameImage3 = $this->generateUniqueFileName().'.'.$image3->guessExtension();
-                 $image3->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage3);
+                 $image3->move($this->getParameter('uploads_directory').'/'.$currentId,$fileNameImage3);
                  $restaurant->setImage3($fileNameImage3);
              }
              if ($image4 != null) {
                  $fileNameImage4 = $this->generateUniqueFileName().'.'.$image4->guessExtension();
-                 $image4->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage4);
+                 $image4->move($this->getParameter('uploads_directory').'/'.$currentId,$fileNameImage4);
                  $restaurant->setImage4($fileNameImage4);
 
              }
@@ -122,6 +127,9 @@ class Restaurants extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
+        $lastId = $em->getRepository('App:Restaurant')->lastRestarantId();
+        $currentId = $lastId->getId() +1 ;
+
         $form = $this->createForm(RestaurantType::class, $restaurant);
         $form->handleRequest($request);
 
@@ -140,28 +148,29 @@ class Restaurants extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->files->get('restaurant')['coverPath'] != null) {
                 $fileNameCover = $this->generateUniqueFileName().'.'.$fileCover->guessExtension();
-                $fileCover->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameCover);
+                $fileCover->move($this->getParameter('uploads_directory').'/'.$id,$fileNameCover);
                 $restaurant->setCoverPath($fileNameCover);
             }
             if ($request->files->get('restaurant')['image1'] != null) {
                 $fileNameImage1 = $this->generateUniqueFileName().'.'.$image1->guessExtension();
-                $image1->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage1);
+                $image1->move($this->getParameter('uploads_directory').'/'.$id,$fileNameImage1);
                 $restaurant->setImage1($fileNameImage1);
 
             }
             if ($request->files->get('restaurant')['image2'] != null) {
                 $fileNameImage2 = $this->generateUniqueFileName().'.'.$image2->guessExtension();
-                $image2->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage2);
+                $image2->move($this->getParameter('uploads_directory').'/'.$id,$fileNameImage2);
                 $restaurant->setImage2($fileNameImage2);
             }
             if ($request->files->get('restaurant')['image3'] != null) {
                 $fileNameImage3 = $this->generateUniqueFileName().'.'.$image3->guessExtension();
-                $image3->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage3);
+                $image3->move($this->getParameter('uploads_directory').'/'.$id,$fileNameImage3);
                 $restaurant->setImage3($fileNameImage3);
             }
+
             if ($request->files->get('restaurant')['image4'] != null) {
                 $fileNameImage4 = $this->generateUniqueFileName().'.'.$image4->guessExtension();
-                $image4->move($this->getParameter('uploads_directory').'/'.$restaurant->getName(),$fileNameImage4);
+                $image4->move($this->getParameter('uploads_directory').'/'.$id,$fileNameImage4);
                 $restaurant->setImage4($fileNameImage4);
 
             }

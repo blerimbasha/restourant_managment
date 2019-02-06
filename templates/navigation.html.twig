@@ -8,15 +8,15 @@
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-                <div class="input-group no-border">
-                    <input type="text" value="{{ app.request.query.get('search') }}" name="search" class="form-control" placeholder="Search...">
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
-            </form>
+            {#<form class="navbar-form">#}
+                {#<div class="input-group no-border">#}
+                    {#<input type="text" value="{{ app.request.query.get('search') }}" name="search" class="form-control" placeholder="Search...">#}
+                    {#<button type="submit" class="btn btn-white btn-round btn-just-icon">#}
+                        {#<i class="material-icons">search</i>#}
+                        {#<div class="ripple-container"></div>#}
+                    {#</button>#}
+                {#</div>#}
+            {#</form>#}
             {% if app.user is null %}
                 <a href="{{ path('login') }}"> <i class="fa fa-sign-in"></i>Login</a>
             {% else %}

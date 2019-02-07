@@ -1,17 +1,21 @@
 <div class="card">
     {{ form_start(form) }}
-
-    <div class="col-md-12">
+    <div class="col-lg-10 mx-auto">
         <div class="form-row">
-            <div class="form-group col-md-4">
-                    {{ form_widget(form.region) }}
+            <div class="form-group col-lg-5">
+                Regions
+                {{ form_widget(form.region) }}
             </div>
-            <div class="form-group col-md-4">
-                    {{ form_widget(form.name) }}
+            <div class="form-group col-lg-5">
+                Search by name
+                {{ form_widget(form.name) }}
             </div>
         </div>
-        {{ form_widget(form.submit) }}
+        <div class="form-row">
+            <div class="form-group">
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
     </div>
     {{ form_end(form) }}
-
 </div>

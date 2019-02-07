@@ -26,12 +26,9 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         $form = $this->createForm(SearchType::class);
-        $form->handleRequest($request);
-
         return $this->render('search.html.twig', [
             'form' => $form->createView(),
-            'request', $request
-
+//            'request', $request
         ]);
     }
 }

@@ -42,10 +42,9 @@ class Restaurants extends Controller
     {
         $repository = $this->getDoctrine()->getManager();
 
-//        dump($request->request->get('search')['region']);die;
         $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
-            ($request->request->get('search')['name']),
-            $request->request->get('search')['region']
+            ($request->query->get('search')['name']),
+            $request->query->get('search')['region']
         );
 
         $pagination = $paginator->paginate(

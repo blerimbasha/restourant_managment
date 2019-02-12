@@ -41,16 +41,17 @@ class Restaurants extends Controller
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $repository = $this->getDoctrine()->getManager();
-
         $restaurants = $repository->getRepository('App:Restaurant')->findAllRestaurants(
-            ($request->query->get('search')['name']),
-            $request->query->get('search')['region']
+            $request->query->get('search')['region'],
+            $request->query->get('search')['name'],
+            $request->query->get('search')['from_date'],
+            $request->query->get('search')['to_date'],
+            $request
         );
-
         $pagination = $paginator->paginate(
             $restaurants,
             $request->query->getInt('page', 1),
-            5
+            10
         );
 
         return $this->render('restaurants/index.html.twig', [

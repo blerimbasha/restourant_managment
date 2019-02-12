@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Regions;
 use App\Entity\Restaurant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,18 +25,6 @@ class SearchType extends AbstractType
                 ],
                 'required' => false
             ])
-//            ->add('hall_1')
-//            ->add('hall_2')
-//            ->add('active')
-//            ->add('comment')
-//            ->add('create_date')
-//            ->add('menu')
-//            ->add('cover_path')
-//            ->add('image_1')
-//            ->add('image_2')
-//            ->add('image_3')
-//            ->add('image_4')
-//            ->add('userId')
             ->add('region', EntityType::class, [
                 'attr' => [
                     'class' => 'select2 select22'
@@ -43,6 +33,23 @@ class SearchType extends AbstractType
                 'choice_label' => function($regions) {
                 return $regions->getName();
                 }
+            ])
+            ->add('from_date', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+//                'data' => new \DateTime("now")
+            ])
+            ->add('to_date', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+//                'data' => new \DateTime("now")
+            ])
+            ->add('period', CheckboxType::class,[
+                'required' => false,
+            ])
+            ->add('reserved', CheckboxType::class,[
+                'required' => false,
+                'error_bubbling' => true,
             ])
         ->add('submit', SubmitType::class)
         ;

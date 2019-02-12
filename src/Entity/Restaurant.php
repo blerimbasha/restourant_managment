@@ -41,7 +41,7 @@ class Restaurant
     /**
      * @var  \App\Entity\User
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="user_id")
-     * ORM\@ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $userId;
 
@@ -92,20 +92,12 @@ class Restaurant
      */
     private $image_4;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $reservation_date;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Bookings", mappedBy="restaurantId")
+     * @ORM\JoinColumn(name="restaurantId", referencedColumnName="restaurantId")
      */
-    private $period;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $reserved;
+    private $restaurantId;
 
 
     public function __construct()
@@ -352,48 +344,6 @@ class Restaurant
         } else {
             $this->image_4 = $image_4;
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReservationDate()
-    {
-        return $this->reservation_date;
-    }
-
-    /**
-     * @param mixed $reservation_date
-     */
-    public function setReservationDate($reservation_date): void
-    {
-        $this->reservation_date = $reservation_date;
-    }
-
-    public function getPeriod()
-    {
-        return $this->period;
-    }
-
-    public function setPeriod($period)
-    {
-        $this->period = $period;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReserved()
-    {
-        return $this->reserved;
-    }
-
-    /**
-     * @param mixed $reserved
-     */
-    public function setReserved($reserved): void
-    {
-        $this->reserved = $reserved;
     }
 
 

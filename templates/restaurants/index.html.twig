@@ -21,7 +21,7 @@
                                             Username
                                         </th>
                                     {% endif %}
-                                    <th{% if restaurants.isSorted('r.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Name', 'r.name') }}</th>
+                                    <th{% if restaurants.isSorted('restaurantId.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Name', 'restaurantId.name') }}</th>
                                     <th>
                                         Hall_1
                                     </th>
@@ -36,9 +36,9 @@
                                     <th>
                                         Regions
                                     </th>
-                                    <th{% if restaurants.isSorted('r.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'r.comment') }}</th>
+                                    <th{% if restaurants.isSorted('restaurantId.comment') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(restaurants, 'Comment', 'restaurantId.comment') }}</th>
 
-                                    <th style="width: 24%">
+                                    <th style="width: 27%">
                                         Action
                                     </th>
                                 </tr>
@@ -48,42 +48,53 @@
                                     <tr>
                                         {% if app.user is not null %}
                                             <td>
-                                                {{ restaurant.getUserId.username }}
+                                                {{ restaurant.restaurantId.getUserId.username }}
                                             </td>
                                         {% endif %}
                                         <td>
-                                            {{ restaurant.name }}
+                                            {{ restaurant.restaurantId.name }}
                                         </td>
                                         <td>
-                                            {{ restaurant.hall1 }}
+                                            {{ restaurant.restaurantId.hall1 }}
                                         </td>
                                         <td>
-                                            {{ restaurant.hall2 }}
+                                            {{ restaurant.restaurantId.hall2 }}
                                         </td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}
                                             <td>
-                                                {{ restaurant.active }}
+                                                {{ restaurant.restaurantId.active }}
                                             </td>
                                         {% endif %}
                                         <td>
-                                            {{ restaurant.region.name }}
+                                            {{ restaurant.restaurantId.region.name }}
                                         </td>
                                         <td>
-                                            {{ restaurant.comment }}
+                                            {{ restaurant.restaurantId.comment }}
                                         </td>
                                         <td>
                                             {% if is_granted(['ROLE_SUPER_ADMIN']) %}
-                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
+                                                <a href="{{ path('view_restaurant',{'id':restaurant.restaurantId.id}) }}"
                                                    class="btn btn-sm btn-primary">View</a>
-                                                <a href="{{ path('edit_restaurant',{'id':restaurant.id}) }} "
+                                                <a href="{{ path('edit_restaurant',{'id':restaurant.restaurantId.id}) }} "
                                                    class="btn btn-warning btn-sm">Edit</a>
                                                 <a href="#" data-toggle="modal"
                                                    data-target="#exampleModal"
                                                    class="btn btn-danger btn-sm">Remove </a>
+                                                {% if restaurant.reserved %}
+                                                    <i class="material-icons text-danger">lens</i>
+                                                {% else %}
+                                                    <i class="material-icons text-success">lens</i>
+                                                {% endif %}
                                                 {{ include('modal/modal.html.twig') }}
                                             {% else %}
-                                                <a href="{{ path('view_restaurant',{'id':restaurant.id}) }}"
-                                                   class="btn btn-sm success">View</a>
+                                                <a href="{{ path('view_restaurant',{'id':restaurant.restaurantId.id}) }}"
+                                                   class="btn btn-sm btn-info">View</a>
+                                                {% if restaurant.status %}
+                                                    <a href="#" class="btn btn-danger btn-sm disabled" role="button" aria-disabled="true">Reserved</a>
+                                                {% else %}
+                                                    <a href="#" class="btn btn-success btn-sm" role="button">Book Now</a>
+                                                {% endif %}
+                                                {% if restaurant.period %}NIGHT{% else %}DAY{% endif %}
                                             {% endif %}
                                         </td>
                                     </tr>

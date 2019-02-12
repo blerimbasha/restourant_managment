@@ -17,13 +17,12 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($request->query->get('search') != '') {
-            $restaurants = $em->getRepository('App:Restaurant')->findAllRestaurants(
+            $restaurants = $em->getRepository('App:Bookings')->findByBooking(
                 $request->query->get('search')['region'],
                 $request->query->get('search')['name'],
                 $request->query->get('search')['from_date'],
                 $request->query->get('search')['to_date'],
                 $request
-
             );
             $pagination = $paginator->paginate(
                 $restaurants,

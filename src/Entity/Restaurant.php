@@ -92,7 +92,20 @@ class Restaurant
      */
     private $image_4;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $reservation_date;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $period;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $reserved;
 
 
     public function __construct()
@@ -339,6 +352,48 @@ class Restaurant
         } else {
             $this->image_4 = $image_4;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReservationDate()
+    {
+        return $this->reservation_date;
+    }
+
+    /**
+     * @param mixed $reservation_date
+     */
+    public function setReservationDate($reservation_date): void
+    {
+        $this->reservation_date = $reservation_date;
+    }
+
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    public function setPeriod($period)
+    {
+        $this->period = $period;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReserved()
+    {
+        return $this->reserved;
+    }
+
+    /**
+     * @param mixed $reserved
+     */
+    public function setReserved($reserved): void
+    {
+        $this->reserved = $reserved;
     }
 
 

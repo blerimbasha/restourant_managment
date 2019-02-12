@@ -19,8 +19,14 @@
                                     <div class="card-body">
                                         {{ form_row(form.name) }}
                                         {{ form_row(form.userId) }}
-                                        {{ form_row(form.hall1) }}
-                                        {{ form_row(form.hall2) }}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{ form_row(form.hall1) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form_row(form.hall2) }}
+                                            </div>
+                                        </div>
                                         {{ form_row(form.region) }}
                                         <p>
                                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

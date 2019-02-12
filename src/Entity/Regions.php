@@ -17,6 +17,10 @@ class Regions
     const FERIZAJ  = 5;
     const PEJE  = 6;
     const GJAKOVE  = 7;
+    const PERIOD_DAY = 0;
+    const PERIOD_NIGHT = 1;
+    const RESERVED = 1;
+    const UNRESERVED = 0;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

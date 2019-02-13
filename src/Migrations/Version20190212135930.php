@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190212101152 extends AbstractMigration
+final class Version20190212135930 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190212101152 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE bookings (id INT AUTO_INCREMENT NOT NULL, restaurant_id INT NOT NULL, booking_date DATE NOT NULL, period INT(7) NOT NULL, status TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE bookings CHANGE status status TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE bookings CHANGE period period INT (7) DEFAULT NULL');
+        $this->addSql('ALTER TABLE restaurant DROP reservation_date, DROP period, DROP reserved');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20190212101152 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE bookings');
+        $this->addSql('ALTER TABLE bookings CHANGE status status TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE bookings CHANGE status status INT (7) NOT NULL');
+        $this->addSql('ALTER TABLE restaurant ADD reservation_date DATE DEFAULT NULL, ADD period TINYINT(1) DEFAULT NULL, ADD reserved TINYINT(1) DEFAULT NULL');
     }
 }

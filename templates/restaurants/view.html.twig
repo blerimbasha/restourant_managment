@@ -10,6 +10,13 @@
                         <div class="card">
                             <h3>Reservation date</h3> <br>
                             soon as possible :D
+                            <ul class="list-group">
+                                {% for book in booking %}
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        {{ book.bookingDate|date('d.m.Y') }}
+                                    </a>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="card">
                             <div class="row card-body">

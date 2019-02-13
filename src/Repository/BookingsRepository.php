@@ -23,8 +23,7 @@ class BookingsRepository extends ServiceEntityRepository
     public function findByBooking($regions, $value, $fromDate, $toDate, $request)
     {
         $qb = $this->createQueryBuilder('b')
-            ->leftJoin('b.restaurantId','r')
-            ;
+            ->leftJoin('b.restaurantId', 'r');
         if ($fromDate or $toDate != null) {
             $qb->andWhere('b.bookingDate >= :fromDate')
                 ->setParameter('fromDate', $fromDate)
@@ -47,7 +46,6 @@ class BookingsRepository extends ServiceEntityRepository
         if ($regions == Regions::GJILAN) {
             $qb->andWhere('r.region = :regions')
                 ->setParameter('regions', $regions);
-
         }
         if ($regions == Regions::PRIZREN) {
             $qb->andWhere('r.region = :regions')
@@ -65,15 +63,17 @@ class BookingsRepository extends ServiceEntityRepository
             $qb->andWhere('r.region = :regions')
                 ->setParameter('regions', $regions);
         }
-        if (!empty($request->query->get('search')['period'])) {
+        if ($request->query->get('search')['period'] == Regions::PERIOD_NIGHT) {
             $qb->andWhere('b.period = :period')
                 ->setParameter('period', Regions::PERIOD_NIGHT);
         }
-        if ($request->query->get('search') != null) {
-            if (!array_key_exists('period', $request->query->get('search'))) {
-                $qb->andWhere('b.period = :period')
-                    ->setParameter('period', Regions::PERIOD_DAY);
-            }
+        if ($request->query->get('search')['period'] == Regions::PERIOD_DAY) {
+            $qb->andWhere('b.period = :period')
+                ->setParameter('period', Regions::PERIOD_DAY);
+        }
+        if ($request->query->get('search')['period'] == Regions::PERIOD_ALLDAY) {
+            $qb->andWhere('b.period = :period')
+                ->setParameter('period', Regions::PERIOD_ALLDAY);
         }
         if (!empty($request->query->get('search')['reserved'])) {
             $qb->andWhere('b.status = :status')

@@ -51,7 +51,7 @@ class Restaurants extends Controller
         $pagination = $paginator->paginate(
             $restaurants,
             $request->query->getInt('page', 1),
-            10
+            20
         );
 
 
@@ -193,10 +193,14 @@ class Restaurants extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $restaurant = $em->getRepository('App:Restaurant')->find($id);
+        $booking = $em->getRepository('App:Bookings')->findBy([
+           'restaurantId' => $id
+        ]);
 
 
         return $this->render('restaurants/view.html.twig', [
                 'restaurant' => $restaurant,
+                'booking' => $booking,
                 'project_path' => $this->getParameter('project_path'),
 
             ]

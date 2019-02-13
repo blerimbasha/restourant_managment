@@ -94,7 +94,12 @@
                                                 {% else %}
                                                     <a href="#" class="btn btn-success btn-sm" role="button">Book Now</a>
                                                 {% endif %}
-                                                {% if restaurant.period %}NIGHT{% else %}DAY{% endif %}
+                                                {% if restaurant.period == 1 %}NIGHT
+                                                    {{ dump(restaurant.period|length) }}
+                                                {% elseif restaurant.period == 0 %}DAY
+                                                    {% elseif restaurant.period == 3  %}
+                                                    ALLDAY
+                                                {% endif %}
                                             {% endif %}
                                         </td>
                                     </tr>

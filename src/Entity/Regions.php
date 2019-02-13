@@ -19,6 +19,7 @@ class Regions
     const GJAKOVE  = 7;
     const PERIOD_DAY = 0;
     const PERIOD_NIGHT = 1;
+    const PERIOD_ALLDAY = 3;
     const BOOKING = 1;
     const UNBOOKING = 0;
     /**

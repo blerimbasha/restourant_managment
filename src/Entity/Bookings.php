@@ -29,12 +29,12 @@ class Bookings
     private $bookingDate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $period;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $status;
 
@@ -67,24 +67,24 @@ class Bookings
         return $this;
     }
 
-    public function getPeriod(): ?int
+    public function getPeriod()
     {
         return $this->period;
     }
 
-    public function setPeriod(int $period): self
+    public function setPeriod(int $period)
     {
         $this->period = $period;
 
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(bool $status)
     {
         $this->status = $status;
 

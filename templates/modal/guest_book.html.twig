@@ -1,0 +1,37 @@
+<div class="modal fade" id="guestBook{{ restaurant.restaurantId.id }}" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">I`m booking {{ restaurant.restaurantId.name }} on <span class="text-success">{{ restaurant.bookingDate|date('d.m.Y') }}</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ restaurant.restaurantId.name }}
+                {#<form method="post" action="{{ path('guest_booking') }}">#}
+                    {#<input type="text" name="restaurantId" value="{{ restaurant.restaurantId.id }}">#}
+                    {#<div class="form-group">#}
+                        {#<label for="recipient-name" class="col-form-label">Name:</label>#}
+                        {#<input type="text" name="name" class="form-control">#}
+                    {#</div>#}
+                    {#<div class="form-group">#}
+                        {#<label for="message-text" class="col-form-label">Mobile:</label>#}
+                        {#<input type="text" name="mobile"  class="form-control">#}
+                    {#</div>#}
+                    {#<div class="form-group">#}
+                        {#<label for="message-text" class="col-form-label">Email:</label>#}
+                        {#<input type="text" name="email"  class="form-control">#}
+                    {#</div>#}
+                    {#<div class="form-group">#}
+
+                    {#</div>#}
+                    {#<div class="form-group">#}
+                        {#<button type="submit" class="btn btn-primary">Book restaurant</button>#}
+                    {#</div>#}
+                {#</form>#}
+                {{ render(controller('App\\Controller\\GuestController::bookingAction')) }}
+            </div>
+        </div>
+    </div>
+</div>

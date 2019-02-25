@@ -99,6 +99,12 @@ class Restaurant
      */
     private $restaurantId;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserNotifications", mappedBy="restaurantId")
+     * @ORM\JoinColumn(name="notificationresId", referencedColumnName="restaurantId")
+     */
+    private $notificationresId;
+
 
     public function __construct()
     {

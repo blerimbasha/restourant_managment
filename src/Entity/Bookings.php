@@ -34,9 +34,14 @@ class Bookings
     private $period;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $status;
+
+    public function __construct()
+    {
+        return $this->status = 33;
+    }
 
     public function getId(): ?int
     {
@@ -84,7 +89,7 @@ class Bookings
         return $this->status;
     }
 
-    public function setStatus(bool $status)
+    public function setStatus($status)
     {
         $this->status = $status;
 

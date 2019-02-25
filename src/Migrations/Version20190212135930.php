@@ -22,7 +22,7 @@ final class Version20190212135930 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE bookings CHANGE status status TINYINT(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE bookings CHANGE status status INT (7) DEFAULT NULL');
         $this->addSql('ALTER TABLE bookings CHANGE period period INT (7) DEFAULT NULL');
         $this->addSql('ALTER TABLE restaurant DROP reservation_date, DROP period, DROP reserved');
     }
@@ -32,7 +32,7 @@ final class Version20190212135930 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE bookings CHANGE status status TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE bookings CHANGE status status INT (7) NOT NULL');
         $this->addSql('ALTER TABLE bookings CHANGE status status INT (7) NOT NULL');
         $this->addSql('ALTER TABLE restaurant ADD reservation_date DATE DEFAULT NULL, ADD period TINYINT(1) DEFAULT NULL, ADD reserved TINYINT(1) DEFAULT NULL');
     }

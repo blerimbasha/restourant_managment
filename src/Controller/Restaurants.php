@@ -12,6 +12,8 @@ namespace App\Controller;
 use App\Entity\Regions;
 use App\Entity\Restaurant;
 use App\Entity\User;
+use App\Entity\UserNotifications;
+use App\Form\GuestBookingType;
 use App\Form\RestaurantType;
 use phpDocumentor\Reflection\Types\This;
 use App\Form\UserType;
@@ -48,6 +50,7 @@ class Restaurants extends Controller
             $request->query->get('search')['to_date'],
             $request
         );
+
         $pagination = $paginator->paginate(
             $restaurants,
             $request->query->getInt('page', 1),

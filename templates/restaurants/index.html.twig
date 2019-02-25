@@ -92,10 +92,10 @@
                                                 {% if restaurant.status %}
                                                     <a href="#" class="btn btn-danger btn-sm disabled" role="button" aria-disabled="true">Reserved</a>
                                                 {% else %}
-                                                    <a href="#" class="btn btn-success btn-sm" role="button">Book Now</a>
+                                                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#guestBook{{ restaurant.restaurantId.id }}" role="button">Book Now</a>
+                                                    {{ include('modal/guest_book.html.twig') }}
                                                 {% endif %}
                                                 {% if restaurant.period == 1 %}NIGHT
-                                                    {{ dump(restaurant.period|length) }}
                                                 {% elseif restaurant.period == 0 %}DAY
                                                     {% elseif restaurant.period == 3  %}
                                                     ALLDAY
